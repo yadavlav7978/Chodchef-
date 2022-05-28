@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+
+
+using namespace std;
+
+int rec(vector<int>&v,int i, int cur,vector<vector<int>>&dp){
+    
+    if(i>=v.size()){
+        return 0;
+    }
+    
+    if(dp[i][cur]!=-1){
+        return dp[i][cur];
+    }
+    
+    int sz=0;
+    int num=v[i];
+    
+    while(num>0){
+        sz++;
+        num=num/10;
+    }
+    
+    int ct1=0,ct2=0,ct3=0;
+    long long temp=(cur*pow(10,sz)+v[i]);
+    
+    if(temp%7==0){
+        ct1=1+rec(v,i+1,temp%7,dp);
+    }else{
+         ct2=rec(v,i+1,temp%7,dp); 
+    }
+    
+    ct3=rec(v,i+1,cur,dp);
+    
+return dp[i][cur]=(((ct1%1000000007)+(ct2%1000000007)+(ct3%1000000007))%1000000007);
+}
+
+
+int main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n;
+        cin>>n;
+        
+        vector<int>v(n);
+        
+        for(int i=0;i<n;i++){
+            cin>>v[i];
+        }
+        
+        vector<vector<int>>dp(n,vector<int>(7,-1));
+        
+        int ans=rec(v,0,0,dp);
+        
+        cout<<ans;
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
