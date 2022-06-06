@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    
+    int z=1;
+    
+    while(z<=t){
+        
+        int x,y;
+        cin>>x>>y;
+        int a,b,c,d;
+        bool f=0;
+        
+        if(x%2==0 && y>=(x+3)){
+            a=x;
+            b=x+1;
+            c=x+2;
+            d=x+3;
+        }
+        else if(x%2==1 && y>=(x+4)){
+            x++;
+             a=x;
+            b=x+1;
+            c=x+2;
+            d=x+3;
+            
+        }else{
+            f=1;
+        }
+        
+        if(f==1){
+            cout<<-1;
+        }else{
+            cout<<a<<" "<<b<<" "<<c<<" "<<d;
+        }
+    
+         cout<<endl;
+         z++;
+    }
+    
+    return 0;
+}
