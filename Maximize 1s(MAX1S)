@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+#define int long long int
+using namespace std;
+
+long long kadane(vector<long long>temp,int n){
+    
+    long long sum=0;
+    long long ans=0;
+    
+    for(int i=0;i<n;i++){
+        
+        sum+=temp[i];
+        
+        if(sum<0){
+            sum=0;
+        }
+        ans=max(ans,sum);
+    }
+    
+    return ans;
+}
+
+signed main() {
+    
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        string s;
+        cin>>s;
+        
+        int n=s.length();
+        
+        vector<long long>temp(n);
+        
+        for(int i=0;i<n;i++){
+            
+            if(s[i]=='1'){
+                
+                temp[i]=-((i+1)*(n-i));
+                
+            }else{
+                temp[i]=((i+1)*(n-i));
+            }
+        }
+        
+        long long ans=kadane(temp,n);
+        
+        
+        for(int i=0;i<n;i++){
+            
+            if(s[i]=='1')
+            {
+                ans+=(i+1)*(n-i);
+            }
+        }
+        cout<<ans<<endl;
+        
+        a++;
+    }
+	
+	
+	return 0;
+}
