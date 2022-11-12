@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#define int long long 
+
+using namespace std;
+
+bool isDivisible(int x, int y)
+{
+    if (y == 1)
+        return true;
+ 
+    int z = __gcd(x, y);
+ 
+    if (z == 1)
+        return false;
+ 
+    return isDivisible(x, y / z);
+}
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int x,y;
+        cin>>x>>y;
+        
+    
+        if (isDivisible(x, y)){
+        cout << "Yes" << endl;
+        }
+       else{
+        cout << "No" << endl;
+    }
+    
+       
+         a++;
+    }
+    
+    return 0;
+}
