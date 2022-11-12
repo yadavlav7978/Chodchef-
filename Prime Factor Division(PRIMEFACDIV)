@@ -1,3 +1,5 @@
+Given two integers. We need to find if the first number x is divisible by all prime divisors of y. 
+
 #include <bits/stdc++.h>
 #define int long long 
 
@@ -42,3 +44,12 @@ signed main()
     
     return 0;
 }
+
+# 
+A simple solution is to find all prime factors of y. For every prime factor, check if it divides x or not. 
+An efficient solution is based on the below facts. 
+1) if y == 1, then it no prime divisors. Hence answer is “Yes” 
+2) We find GCD of x and y. 
+      a) If GCD == 1, then clearly there are no common divisors of x and y, hence answer is “No”. 
+      b) If GCD > 1, the GCD contains prime divisors which divide x also. Now, we have all unique prime divisors if and only if y/GCD has such unique prime divisor. So we have to find uniqueness for pair (x, y/GCD) using recursion.
+#
