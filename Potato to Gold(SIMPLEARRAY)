@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+#define int long long int 
+#define md 1000000007
+
+using namespace std;
+
+int power(int a,int b){
+    
+    int res=1;
+    
+    while(b){
+        
+        if(b&1) {
+            res=res*a;
+            res%=md;
+        }
+        a=a*a;
+        a%=md;
+        b=b>>1;
+    }
+    
+    return res;
+}
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n,k;
+        cin>>n>>k;
+        
+        int arr[n];
+        
+       vector<int>mp(k,0);
+        
+        for(int i=0;i<n;i++){
+            
+            cin>>arr[i];
+    
+            mp[arr[i]%k]++;
+        }
+        
+        
+        int ans=1;
+        
+        for(int i=1;i<(k+1)/2;i++){
+            
+            int x=mp[i];
+            int y=mp[k-i];
+            
+            int temp=(power(2,x)+power(2,y)-1);
+            temp%=md;
+            ans*=temp;
+            ans%=md;
+        }
+        
+        if(mp[0]>0){
+        ans*=(mp[0]+1);
+        ans%=md;
+        }
+        
+        if(k%2==0 and mp[k/2]>0){
+            ans*=(mp[k/2]+1);
+            ans%=md;
+        }
+        
+     
+        
+        cout<<ans;
+        
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
