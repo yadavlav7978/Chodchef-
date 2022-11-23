@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+#define int long long int
+
+using namespace std;
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n;
+        cin>>n;
+        
+        vector<int>arr(n);
+        
+        for(int i=0;i<n;i++){
+            cin>>arr[i];
+        }
+        
+        vector<int>temp(n,0);
+        
+        for(int i=0;i<n;i++){
+            
+            int val=arr[i]-arr[n-i-1];
+            
+            if(val<0) temp[i]=-1*val;
+        }
+        
+        int ans=temp[0];
+        
+        for(int i=1;i<n;i++){
+            int x=temp[i]-temp[i-1];
+            
+            if(x>0) ans+=x;
+        }
+        
+  
+    
+        cout<<ans;
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
