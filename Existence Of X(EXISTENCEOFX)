@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+#define int long long int 
+
+using namespace std;
+
+signed main() {
+	
+	int t;
+	cin>>t;
+	
+	int a=1;
+	
+	while(a<=t){
+	    
+	    int A,B,C;
+	    cin>>A>>B>>C;
+	    
+	    int carry=0;
+	    
+	    for(int i=0;i<31;i++){
+	        
+	        int ax=(A>>i)&1;
+	        int bx=(B>>i)&1;
+	        int cx=(C>>i)&1;
+	        
+	        for(int j=0;j<2;j++){
+	            
+	            if((((ax^j)+(bx^j)+(carry))&1)==(cx^j)){
+	                if(((ax^j)+(bx^j)+(carry))>1){
+	                    carry=1;
+	                }else{
+	                    carry=0;
+	                }
+	                break;
+	            }
+	        }
+	    }
+	    
+	    if(carry==1){
+	        cout<<"NO";
+	    }else{
+	        cout<<"YES";
+	    }
+	    cout<<endl;
+	    
+	    a++;
+	}
+	
+	return 0;
+}
