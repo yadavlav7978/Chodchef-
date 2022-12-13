@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+#define int long long int
+
+using namespace std;
+
+bool call(int n,int m,int k,int x){
+    
+    if(x%(n*k+m)==0) return true;
+    
+    if(x%((n*k)+m)-(n*(k-1))>0) return true;
+    
+    return false;
+    
+}
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n,m,k,x;
+        cin>>n>>m>>k>>x;
+
+        
+        if(call(n,m,k,x)) cout<<"YES";
+        else cout<<"NO";
+        
+    
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
