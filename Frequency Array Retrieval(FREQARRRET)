@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+#define int long long int
+
+using namespace std;
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n;
+        cin>>n;
+        
+        int arr[n];
+        
+        for(int i=0;i<n;i++){
+            cin>>arr[i];
+        }
+        map<int,pair<int,int>>mp;
+        
+        vector<int>ans(n);
+        
+        bool is=0;
+        int put=1;
+        
+        for(int i=0;i<n;i++){
+            
+            if(mp.find(arr[i])==mp.end()){
+                
+                mp[arr[i]]={put,arr[i]-1};
+                
+                   if(mp[arr[i]].second==0){
+                      mp.erase(arr[i]);
+                }
+                
+                ans[i]=put;
+                put++;
+                
+            }else{
+                
+                if(mp[arr[i]].second>0){
+                    
+                ans[i]=mp[arr[i]].first;
+                
+                mp[arr[i]].second--;
+                
+                if(mp[arr[i]].second==0){
+                    mp.erase(arr[i]);
+                }
+                }
+                
+            }
+        }
+        
+        for(auto it:mp){
+            if(it.second.second>0){
+                is=1;
+                break;
+            }
+        }
+    
+
+        
+        if(is){
+            cout<<-1;
+        }else{
+        
+       for(int i=0;i<n;i++){
+           cout<<ans[i]<<" ";
+          }
+        }
+    
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
