@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+#define int long long int
+
+using namespace std;
+
+bool cmp(pair<int,int>&a,pair<int,int>&b){
+    
+    if((a.first+a.second)==(b.first+b.second)){
+        return a.first<b.first;
+    }
+    
+    return (a.first+a.second)<(b.first+b.second); 
+}
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n,k;
+        cin>>n>>k;
+        
+        vector<int>A(n),B(n);
+        vector<pair<int,int>>p;
+        
+        for(int i=0;i<n;i++){
+            cin>>A[i];
+        }
+        
+        for(int i=0;i<n;i++){
+            cin>>B[i];
+        }
+        
+        for(int i=0;i<n;i++){
+            p.push_back({A[i],B[i]});
+
+        }
+        
+        sort(p.begin(),p.end(),cmp);
+    
+        
+        int i=0;
+        int ttl=0;
+        int ct=0;
+        int mx=0;
+        
+        while(i<p.size() and ttl<k){
+            
+            ttl+=(p[i].first+p[i].second);
+            
+            if(ttl>k){
+                ttl-=(p[i].first+p[i].second);
+                break;
+            }
+            
+            mx=max(mx,p[i].second);
+    
+            ct++;
+            i++;
+        }
+        
+        for(int j=i;j<p.size();j++){
+            
+            if((ttl+p[j].first)<=k){
+                ct++;
+                break;
+            }
+            
+            else if(((ttl-mx)+p[j].first+p[j].second)<=k){
+                ct++;
+                break;
+            }
+        }
+    
+    
+        cout<<ct;
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
