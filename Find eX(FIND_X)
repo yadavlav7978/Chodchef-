@@ -1,0 +1,46 @@
+Replace A=A%B,an C=C%D, because (A%B)%B=A%B
+hence A=C;
+and also A+X=C+X
+
+so this equation (A+X)%B=(C+X)%B satisfy only when A+X=LCM(B,D),i.e X=LCM(B,D)-A;
+
+
+#include <bits/stdc++.h>
+#define int long long 
+
+using namespace std;
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int A,B,C,D;
+        
+        cin>>A>>B>>C>>D;
+        
+        
+        int ans;
+         
+         if((A+1)%B==(C+1)%D){
+             ans=1;
+         }else{
+             
+             A=A%B;
+             C=C%D;
+             int lcm=(B*D)/__gcd(B,D);
+             ans=lcm-A;
+         }
+ 
+        
+        cout<<ans;
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
