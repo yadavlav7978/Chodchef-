@@ -1,0 +1,84 @@
+Now since we need atleast 2 distinct terms we can have any one bit position that consists of atleast one term having that bit set and 
+atleast one term with that bit unset so that when and operation is performed with 0 for that bit ,
+we would surely get two distinct terms(one with that bit set and other unset).
+In other words, if for any bit position the count of terms having that bit set is not equal to 0 and n , then we can have that bit unset in mask .
+
+Now if in x ,
+
+if that bit is set then we can make it unset and all Least significant bits can be made set.
+if that bit is already unset then our answer is x itself . Though I have used mask but no need for this condition.
+We would repeat this step for all satisfying bits(terms with the bit set as well as unset exist i.e count of terms having that bit set is not equal to 0 and n)
+
+
+
+
+
+
+#include <bits/stdc++.h>
+#define int long long 
+
+using namespace std;
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n,x;
+        cin>>n>>x;
+        
+        vector<int>v(n);
+        
+        
+        for(int i=0;i<n;i++){
+            cin>>v[i];
+        }
+        
+        int ans=0;
+        
+      for(int i=0;i<=31;i++){
+          
+          int ct1=0;
+          int ct0=0;
+          
+          for(int j=0;j<n;j++){
+              
+              int val=v[j];
+              
+              if((val&(1<<i))!=0){
+                  ct1++;
+              }else{
+                  ct0++;
+              }
+          }
+          
+            if(ct1>0 and ct0>0){
+                int temp=x;
+                
+                if((x&(1<<i))!=0){    // bit set in x   (make Y)
+                    temp=temp^(1<<i);
+                    
+                    for(int k=i-1;k>=0;k--){
+                        temp=temp|(1<<k);
+                    }
+                    ans=max(ans,temp);
+                    
+                }else{               // bit not set in x
+                    ans=max(ans,x);
+                }
+          }
+      }
+     
+        cout<<ans;
+    
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
