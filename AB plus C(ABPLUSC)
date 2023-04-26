@@ -1,3 +1,30 @@
+1.  We want 1 < A, B, C ≤ 106 such that X = AB + C.
+As the sample shows, when X = 1 no solution exists. For X > 1, it's in fact always possible to find a solution.
+There are lots of different constructions, this hints section will outline only one method.
+Notice that X = AB + C means that the product AB should be reasonably close to X, but less than it (since we want C > 1). Can you think of a reasonable approximation, and values of A and B that achieve this?
+
+2.Hint 2
+Let Y be the largest integer such that Y2 < X.
+Since 2≤ X ≤ 1012, clearly we have 1 ≤ Y < 106.
+So, after finding Y (which is the floor of the square root of X - 1
+), we can choose A B = Y and C X y2.
+=
+=
+This almost always works: if does satisfy A, B, C > 1 and
+A, B ≤ 106, but in some cases we might have C > 106.
+Do you see a simple way to fix this?
+
+
+3. Hint 3
+If C > 106, that means X - y² > 106.
+So, we just need to get to a product that's closer to X than Y2.
+The simplest way to do this is to increase one of the terms, i.e,
+consider Y. (Y+1) instead of Y².
+It's not hard to prove that this always works in this case, i.e,
+choosing A = Y, B = Y + 1, C = X - Y · (Y + 1) is a
+solution when X - y² > 106.
+This solves the problem!
+
 
 
 #include <bits/stdc++.h>
