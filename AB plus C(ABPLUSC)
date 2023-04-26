@@ -1,0 +1,51 @@
+
+
+#include <bits/stdc++.h>
+#define int long long
+using namespace std;
+
+bool square(int n){
+    
+    int sqr=sqrt(n);
+    if(sqr*sqr==n) return true;
+    
+    return false;
+}
+
+signed main() {
+	
+	int a=1;
+	int t;
+	cin>>t;
+	
+	while(a<=t){
+	    
+	    int n;
+	    cin>>n;
+	    
+	    if(n==1){
+	        cout<<-1;
+	    }
+	    else if(square(n)){          // if number square root of any number
+	        int A=sqrt(n-1);
+	        int B=A+1;               // There is also choice to put B=A+2 and                        C=1,But may be possible that B>1e6 
+	        int C=n-(A*B);
+	        cout<<A<<" "<<B<<" "<<C;
+	    }
+	    else{
+	        int A=sqrt(n);
+	        int B=A;
+	        
+	        if(A*(B+1)<n){
+	            B++;
+	        }
+	        int C=n-(A*B);
+	        cout<<A<<" "<<B<<" "<<C;
+	    }
+	    
+	    cout<<endl;
+	    
+	    a++;
+	}
+	return 0;
+}
