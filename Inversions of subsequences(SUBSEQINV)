@@ -1,0 +1,98 @@
+Hint 3
+<
+Suppose index i is not involved in any inversion. Then,
+• There's no j < i such that Pj > P₁ *and
+There's no j> i such that P; > Pj
+In simple words, P; must be greater than anything before it, and less than anything after it.
+That is, P; should be both the maximum of its prefix, and the minimum of its suffix.
+Computing prefix maximums and suffix minimums is easy to do in O(N) time, after which
+this condition can easily be checked for each index.
+This gives us æ, the number of 'free' indices. As mentioned in the above hint, the answer is
+simply 2 after this.
+But wait! There's a single edge case to handle here!
+If x = N, i.e every index is free, then we in fact need to subtract 1 from the answer, since
+we'd be counting the empty sequence as well which we don't want.
+
+
+
+
+#include <bits/stdc++.h>
+#define md 998244353
+#define int long long 
+
+using namespace std;
+
+int powr(int a,int b){
+    
+    int ans=1;
+    
+    while(b>0){
+        
+        if(b&1!=0){
+            ans=ans*a;
+            ans%=md;
+        }
+        
+        a=a*a;
+        a%=md;
+        b=b>>1;
+        
+    }
+    
+    return ans;
+    
+}
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n;
+        cin>>n;
+        
+        vector<int>v(n);
+        
+        for(int i=0;i<n;i++){
+            cin>>v[i];
+        }
+        
+        int pref[n];
+        int mx=v[0];
+        
+        for(int i=0;i<n;i++){
+            mx=max(mx,v[i]);
+            pref[i]=mx;
+        }
+        
+        int suf[n];
+        int mn=v[n-1];
+        
+        for(int i=n-1;i>=0;i--){
+            mn=min(mn,v[i]);
+            suf[i]=mn;
+        }
+        
+        int ct=0;
+        
+        for(int i=0;i<n;i++){
+            
+            if(pref[i]>v[i] || v[i]>suf[i]) ct++;
+        }
+        
+        int ans=powr(2,n-ct);
+        if(ct==0){
+            ans--;
+        }
+        cout<<ans;
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
