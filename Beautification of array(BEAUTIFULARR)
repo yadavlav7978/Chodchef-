@@ -1,0 +1,85 @@
+There are three parts to this problem:
+1. Computing the beauty of an array faster than O(N2). 2. Figuring out which elements to apply the operations to.
+3. Actually applying these operations quickly, since O(K) would be too slow.
+Let's go over these one at a time.
+► Computing beauty
+Now, let's look at what happens when we need to perform operations.
+Suppose we had K = 1, i.e, only one operation needed to be performed. What would the optimal move be?
+From the way we rewrote the cost above, it's obvious that we should choose the smallest A; to increase by 1.
+In fact, this greedy choice holds even for K > 1: for each move, choose the smallest element of A and increase it by one!
+► Proof
+Now, let's see how we can use this information to solve the problem at hand.
+Let's sort A, so that A₁ ≤ A2 ≤ A3 ≤ ….. ≤ An. Now, look at the process of performing operations:
+• First, we increase only A₁ till it reaches A2.
+Then, we alternate increasing A₁ and A2 till they reach A3.
+• Then, we A1, A2, A3 in turn till they all reach A4.
+• We increase A₁, . . ., A¿–1 in turn till they all reach A¿.
+This allows us to quickly simulate the process by combining operations. Let's iterate from 1 to N.
+When at index i:
+• We've ensured that so far, A₁ = A₂ = ... = A¿. Note that they'll all be equal to (the initial value of) A¿.
+• Next, we must perform operations till all these elements reach A¿+1·
+This takes exactly i· (A;+1 - A;) operations.
+• If K is at least this number, we know that all the operations can be performed, so we move to index i+ 1.
+• Otherwise, the process stops at this index.
+Since the operations are to be performed on the elements in turn, the exact values of all of A1, ..., A¿ can be figured out; and Ai+1, Ai+2, ..., AN won't change.
+We do (1) work at each index; and O(N) work at one index, so this is overall linear. Since we required sorting, the complexity is O(N log N).
+
+
+
+
+
+#include <bits/stdc++.h>
+#define int long long 
+#define md 1000000007
+using namespace std;
+
+signed main() {
+	int t;
+	cin>>t;
+	
+	int a=1;
+	while(a<=t){
+	    
+	    int n,k;
+	    cin>>n>>k;
+	    
+	    vector<int>v(n);
+	    for(int i=0;i<n;i++){
+	        cin>>v[i];
+	    }
+	    sort(v.begin(),v.end());
+	    v.push_back(INT_MAX);
+	    
+	    for(int i=1;i<=n;i++){
+	        
+	        int op=i*(v[i]-v[i-1]);
+	        if(k>=op){
+	            k-=op;
+	        }else{
+	            int rem=k%i;
+	            for(int j=0;j<i;j++){
+	                v[j]=v[i-1]+k/i;
+	                if(rem>0){
+	                    v[j]+=1;
+	                    rem--;
+	                }
+	            }
+	            break;
+	        }
+	    }
+	    
+	    int ans=0;
+	    int sum=v[0];
+	    
+	    for(int i=1;i<n;i++){
+	         ans=(ans+(sum*v[i])%md)%md;
+	         sum=(sum+v[i])%md;
+	    }
+	
+	    cout<<ans<<endl;
+	    
+	    
+	    a++;
+	}
+	return 0;
+}
