@@ -1,3 +1,13 @@
+Suppose we removed some indices, and the array satisfies the given condition, i.e, A is even, for k=i
+each 1 ≤ i ≤ j ≤ A.
+Then, in particular this holds for i = j, which means every element must itself be even.
+Of course, if every element is even then every subarray sum is also even; so we've reduced our problem to counting the number of ways of removing indices such that all remaining elements are even.
+That's not too hard:
+First, all odd elements must be removed.
+Suppose this leaves K even elements. We can then choose any subset of them to remove, for 2K possible ways.
+There's one edge case: since the statement asks for non-empty subsets, if K = N (i.e all elements of the original array are even), the answer is 2-N 1; since we can't choose the empty subset. -
+Since K < N, computing 2K can be done by just repeated multiplication using a loop.
+
 #include <bits/stdc++.h>
 #define int long long 
 #define M 1000000007
