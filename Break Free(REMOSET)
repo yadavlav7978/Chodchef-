@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#define int long long 
+#define M 1000000007
+
+using namespace std;
+int fact[1000000];
+
+int binary_expo(int a,int b){
+    
+    int  ans=1;
+    
+    while(b){
+        
+        if(b&1){
+            ans=(ans*1LL*a)%M;
+        }
+        a=(a*1LL*a)%M;
+        b=b>>1;
+    }
+    
+    return ans;
+}
+int combination(int n,int r){
+    
+    int nem=fact[n];
+    
+    int den=(fact[r]*fact[n-r])%M;
+    
+    int ans=(nem*binary_expo(den,M-2))%M;  
+                                                
+    return ans;
+    
+}
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+     fact[0]=1;
+    for(int i=1;i<=1000000;i++){
+        fact[i]=(fact[i-1]*1LL*i)%M;
+    }
+
+    
+    while(a<=t){
+        
+        int n;
+        cin>>n;
+        
+        int arr[n];
+        int ct=0;
+        
+        for(int j=0;j<n;j++){
+            cin>>arr[j];
+            
+            if(arr[j]%2==0){ct++;}
+        }
+       int ans=0;
+        for(int k=0;k<=ct;k++){
+            ans+=combination(ct,k);
+            ans%=M;
+        }
+        
+        if(ct==n){
+            ans--;
+        }
+        cout<<ans;
+    
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
