@@ -1,0 +1,78 @@
+
+----------------------Explanation------------------------------------------------
+            
+ string arr4="3 4 1 2";
+ string arr5="4 5 1 2 3";
+ string arr6="6 5 1 2 3 4";
+ string arr7="6 7 1 2 3 4 5";
+
+3     4    1      2
+i-1   i   i-3   i-2
+
+for five "4 5 1 2 3 " given, for for six "6 5 1 2 3 4" you can find this by hit and trial, for seven "6 7 1 2 3 4 5" you can find this by hit and trial
+                             
+if n%4==0 then it can be shown that for every consecutive four element i-1, i, i-3,i-2; will be correct combination where i is index of 4rth element of that combination 
+because difference will be 2 which is prime because index of i-1 will be i-3 and index of i will be i-2 and index of i-3 will be i-1 and index of i-2 will be i. 
+now if n%4==1 then (n-5)%4==0; if(n%4==2) then (n-6)%4==0; if(n%4==3) then (n-7)%4==0;
+
+
+
+
+
+----------------------------------  SOLUTION----------------------------
+
+#include <bits/stdc++.h>
+#define int long long 
+
+using namespace std;
+
+void fun(int n,int start){
+    
+   for(int i=start;i<=n;i+=4){
+       cout<<i-1<<" "<<i<<" "<<i-3<<" "<<i-2<<" ";
+   }
+    
+}
+
+signed main()
+{
+    int t;
+    cin>>t;
+    
+    int a=1;
+    
+    while(a<=t){
+        
+        int n;
+        cin>>n;
+        
+        if(n==1 || n==2 || n==3){
+            cout<<-1;
+        }else{
+           string arr4="3 4 1 2";
+           string arr5="4 5 1 2 3";
+           string arr6="6 5 1 2 3 4";
+           string arr7="6 7 1 2 3 4 5";
+           
+           if(n%4==0){
+               fun(n,4);
+           }
+           else if(n%4==1){
+               cout<<arr5<<" ";
+               fun(n,9);
+               
+           }else if(n%4==2){
+               cout<<arr6<<" ";
+               fun(n,10);
+           }
+           else {
+               cout<<arr7<<" ";
+               fun(n,11);
+           }
+        }
+         cout<<endl;
+         a++;
+    }
+    
+    return 0;
+}
